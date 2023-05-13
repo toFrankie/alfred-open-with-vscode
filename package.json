@@ -1,0 +1,18 @@
+{
+  "name": "alfred-open-with-vscode",
+  "version": "0.0.1",
+  "description": "🖥 An Alfred Workflow for opening folders with Visual Studio Code.",
+  "license": "MIT",
+  "author": {
+    "name": "Frankie",
+    "email": "1426203851@qq.com",
+    "url": "https://github.com/toFrankie/alfred-open-with-vscode"
+  },
+  "keywords": [
+    "alfred",
+    "workflow",
+    "vscode",
+    "Visual Studio Code",
+    "open"
+  ]
+}
