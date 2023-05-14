@@ -20,7 +20,7 @@
   ],
   "main": "dist/bundle.js",
   "bin": {
-    "alfred-open-with-vscode-install": "bin/install.sh"
+    "alfred-open-with-vscode-import": "bin/install.sh"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -29,8 +29,7 @@
     "lint": "eslint . --fix",
     "build": "run-s build:js build:alfred",
     "build:js": "rollup -c",
-    "build:alfred": "node scripts/build.js",
-    "postinstall": "alfred-open-with-vscode-install"
+    "build:alfred": "node scripts/build.js"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
