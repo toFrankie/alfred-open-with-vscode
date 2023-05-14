@@ -18,7 +18,7 @@
     "Visual Studio Code",
     "open"
   ],
-  "main": "bundle.js",
+  "main": "dist/bundle.js",
   "bin": {
     "alfred-open-with-vscode-install": "bin/install.sh"
   },

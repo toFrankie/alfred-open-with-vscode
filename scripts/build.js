@@ -10,15 +10,15 @@ const readFileAsync = promisify(fs.readFile)
 ;(async function main() {
   const zip = new AdmZip()
 
-  zip.addLocalFile('./icon.png')
-  zip.addLocalFile('./bundle.js')
+  zip.addLocalFile('./src/icon.png')
+  zip.addLocalFile('./dist/bundle.js')
   zip.addFile('info.plist', await fillInfoPlist())
 
   zip.writeZip(`${pkg.name}.alfredworkflow`)
 })()
 
 async function fillInfoPlist() {
-  const infoPlistPath = path.join(__dirname, '../info.plist')
+  const infoPlistPath = path.join(__dirname, '../src/info.plist')
   const changelogPath = path.join(__dirname, '../CHANGELOG.md')
 
   const infoPlist = await readFileAsync(infoPlistPath, 'utf8')

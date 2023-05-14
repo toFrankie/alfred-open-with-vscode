@@ -1,6 +1,5 @@
 dist/
 node_modules/
-bundle.js
 
 .vscode
 .DS_Store
