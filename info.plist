@@ -54,7 +54,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>open-with-vscode</string>
+	<string>Open with Visual Studio Code</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -69,7 +69,7 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -85,7 +85,7 @@
 				<key>runningsubtext</key>
 				<string>Seaching...</string>
 				<key>script</key>
-				<string>/Users/frankie/.nvm/versions/node/v18.16.0/bin/node ./src/index.js "$1"</string>
+				<string>/Users/frankie/.nvm/versions/node/v18.16.0/bin/node ./dist/bundle.js "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

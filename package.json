@@ -16,11 +16,19 @@
     "Visual Studio Code",
     "open"
   ],
+  "main": "dist/bundle.js",
   "scripts": {
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "build": "rollup -c"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
-    "eslint": "^8.40.0"
+    "@babel/core": "^7.21.8",
+    "@babel/plugin-transform-runtime": "^7.21.4",
+    "@babel/preset-env": "^7.21.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "eslint": "^8.40.0",
+    "rollup": "^3.21.7"
   }
 }
