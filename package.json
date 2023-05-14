@@ -22,14 +22,25 @@
   "bin": {
     "alfred-open-with-vscode-import": "bin/install.sh"
   },
+  "files": [
+    "bin",
+    "alfred-open-with-vscode.alfredworkflow",
+    "CHANGELOG.md",
+    "README.md"
+  ],
   "engines": {
     "node": ">=10.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "scripts": {
     "lint": "eslint . --fix",
     "build": "run-s build:js build:alfred",
     "build:js": "rollup -c",
-    "build:alfred": "node scripts/build.js"
+    "build:alfred": "node scripts/build.js",
+    "prepublish": "run-s lint build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
