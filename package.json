@@ -16,10 +16,19 @@
     "Visual Studio Code",
     "open"
   ],
-  "main": "dist/bundle.js",
+  "main": "bundle.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "bin": {
+    "alfred-open-with-vscode-install": "bin/install.sh"
+  },
   "scripts": {
     "lint": "eslint . --fix",
-    "build": "rollup -c"
+    "build": "run-s build:js build:alfred",
+    "build:js": "rollup -c",
+    "build:alfred": "node scripts/build.js",
+    "postinstall": "alfred-open-with-vscode-install"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
@@ -28,7 +37,9 @@
     "@babel/preset-env": "^7.21.5",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.2",
+    "adm-zip": "^0.5.10",
     "eslint": "^8.40.0",
+    "npm-run-all": "^4.1.5",
     "rollup": "^3.21.7"
   }
 }
