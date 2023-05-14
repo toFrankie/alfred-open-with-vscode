@@ -48,9 +48,9 @@
       </array>
     </dict>
     <key>createdby</key>
-    <string>Frankie</string>
+    <string>$createdby</string>
     <key>description</key>
-    <string>🖥 An Alfred Workflow for opening folders with Visual Studio Code.</string>
+    <string>$description</string>
     <key>disabled</key>
     <false/>
     <key>name</key>
@@ -212,6 +212,10 @@ end run</string>
     <key>userconfigurationconfig</key>
     <array/>
     <key>webaddress</key>
-    <string>https://github.com/toFrankie/alfred-open-with-vscode</string>
+    <string>$webaddress</string>
+    <key>version</key>
+    <string>$version</string>
+    <key>readme</key>
+    <string><![CDATA[$readme]]></string>
   </dict>
 </plist>
