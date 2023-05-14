@@ -85,7 +85,11 @@
           <key>runningsubtext</key>
           <string>Seaching...</string>
           <key>script</key>
-          <string>/Users/frankie/.nvm/versions/node/v18.16.0/bin/node ./bundle.js "$1"</string>
+          <string>zshrc="$HOME/.zshrc"
+
+source $zshrc
+
+$(which node) ./bundle.js "$1"</string>
           <key>scriptargtype</key>
           <integer>1</integer>
           <key>scriptfile</key>
