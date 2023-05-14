@@ -20,7 +20,7 @@ function getDirectories(rootDir, dirName, depth = -1) {
           subtitle: filePath,
           arg: filePath,
           icon: {
-            path: 'icons/folder.png',
+            path: './icon.png',
           },
         })
       }
@@ -77,7 +77,7 @@ function getRecentProjects() {
       title: path.basename(projectPath),
       subtitle: projectPath,
       arg: projectPath,
-      icon: { path: 'icons/folder.png' },
+      icon: { path: './icon.png' },
     }
   })
 }
