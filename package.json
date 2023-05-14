@@ -1,18 +1,26 @@
 {
   "name": "alfred-open-with-vscode",
   "version": "0.0.1",
+  "packageManager": "pnpm@8.5.0",
   "description": "🖥 An Alfred Workflow for opening folders with Visual Studio Code.",
-  "license": "MIT",
   "author": {
     "name": "Frankie",
     "email": "1426203851@qq.com",
     "url": "https://github.com/toFrankie/alfred-open-with-vscode"
   },
+  "license": "MIT",
   "keywords": [
     "alfred",
     "workflow",
     "vscode",
     "Visual Studio Code",
     "open"
-  ]
+  ],
+  "scripts": {
+    "lint": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.6",
+    "eslint": "^8.40.0"
+  }
 }

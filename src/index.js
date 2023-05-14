@@ -1,12 +1,13 @@
-const os = require('os')
-const fs = require('fs')
-const path = require('path')
+const os = require('node:os')
+const fs = require('node:fs')
+const path = require('node:path')
 
 // 获取指定目录下所有子目录及文件
 function getDirectories(rootDir, dirName, depth = -1) {
   const result = []
 
-  if (depth === 0) return result
+  if (depth === 0)
+    return result
 
   const dirs = fs.readdirSync(rootDir)
   for (const dir of dirs) {
@@ -52,24 +53,24 @@ function getRecentProjects() {
 
 // 获取 macOS 平台上所有打开的项目
 function getRecentProjectsMacOS() {
-  let recentFilesPath = path.join(
+  const recentFilesPath = path.join(
     os.homedir(),
-    '/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.vscode.sfl2'
+    '/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.vscode.sfl2',
   )
-  let projectPaths = []
+  const projectPaths = []
 
   try {
-    let data = fs.readFileSync(recentFilesPath)
-    let plist = require('simple-plist')
-    let recentFiles = plist.parse(data).customListItems
+    const data = fs.readFileSync(recentFilesPath)
+    const plist = require('simple-plist')
+    const recentFiles = plist.parse(data).customListItems
 
-    recentFiles.forEach(recentFile => {
-      let filePath = recentFile.URL.filePath
-      if (filePath.endsWith('.code-workspace')) {
+    recentFiles.forEach((recentFile) => {
+      const filePath = recentFile.URL.filePath
+      if (filePath.endsWith('.code-workspace'))
         projectPaths.push(filePath)
-      }
     })
-  } catch (err) {
+  }
+  catch (err) {
     console.log(err)
   }
 
@@ -78,31 +79,31 @@ function getRecentProjectsMacOS() {
 
 // 获取 Windows 平台上所有打开的项目
 function getRecentProjectsWindows() {
-  let appDataPath = process.env.APPDATA || process.env.USERPROFILE + '/AppData/Roaming'
-  let recentFilesPath = path.join(
+  const appDataPath = process.env.APPDATA || `${process.env.USERPROFILE}/AppData/Roaming`
+  const recentFilesPath = path.join(
     appDataPath,
     'Microsoft',
     'Windows',
     'Recent',
     'CustomDestinations',
-    'af678b1d089b0bb7.customDestinations-ms'
+    'af678b1d089b0bb7.customDestinations-ms',
   )
-  let projectPaths = []
+  const projectPaths = []
 
   try {
-    let data = fs.readFileSync(recentFilesPath)
-    let zlib = require('zlib')
-    let buf = zlib.inflateSync(data)
-    let plist = require('simple-plist')
-    let recentFiles = plist.parse(buf.toString()).RecentDestinations
+    const data = fs.readFileSync(recentFilesPath)
+    const zlib = require('node:zlib')
+    const buf = zlib.inflateSync(data)
+    const plist = require('simple-plist')
+    const recentFiles = plist.parse(buf.toString()).RecentDestinations
 
-    recentFiles.forEach(recentFile => {
-      let filePath = recentFile.path
-      if (filePath.endsWith('.code-workspace')) {
+    recentFiles.forEach((recentFile) => {
+      const filePath = recentFile.path
+      if (filePath.endsWith('.code-workspace'))
         projectPaths.push(filePath)
-      }
     })
-  } catch (err) {
+  }
+  catch (err) {
     console.log(err)
   }
 
@@ -111,18 +112,18 @@ function getRecentProjectsWindows() {
 
 // 获取打开项目的次数
 function getProjectOpenCount(projectPath) {
-  let settingsPath = path.join(os.homedir(), '.vscode', 'recently-opened.json')
+  const settingsPath = path.join(os.homedir(), '.vscode', 'recently-opened.json')
   let openCount = 0
 
   try {
-    let data = fs.readFileSync(settingsPath)
-    let settings = JSON.parse(data.toString())
-    settings.workspaces2.forEach(workspace => {
-      if (workspace.configPath === projectPath) {
+    const data = fs.readFileSync(settingsPath)
+    const settings = JSON.parse(data.toString())
+    settings.workspaces2.forEach((workspace) => {
+      if (workspace.configPath === projectPath)
         openCount = workspace.folderUri.length
-      }
     })
-  } catch (err) {
+  }
+  catch (err) {
     console.log(err)
   }
 
@@ -131,12 +132,12 @@ function getProjectOpenCount(projectPath) {
 
 // 获取最近打开的项目列表
 function getRecentProjectList() {
-  let projectPaths = getRecentProjects()
-  let projects = []
+  const projectPaths = getRecentProjects()
+  const projects = []
 
   // 将打开的项目转换为 Alfred items
-  projectPaths.forEach(projectPath => {
-    let stats = fs.statSync(projectPath)
+  projectPaths.forEach((projectPath) => {
+    const stats = fs.statSync(projectPath)
 
     if (stats.isDirectory()) {
       projects.push({
@@ -147,7 +148,8 @@ function getRecentProjectList() {
           path: 'icons/folder.png',
         },
       })
-    } else {
+    }
+    else {
       projects.push({
         title: path.basename(projectPath),
         subtitle: projectPath,
@@ -161,8 +163,8 @@ function getRecentProjectList() {
 
   // 按打开次数排序
   projects.sort((a, b) => {
-    let aCount = getProjectOpenCount(a.arg)
-    let bCount = getProjectOpenCount(b.arg)
+    const aCount = getProjectOpenCount(a.arg)
+    const bCount = getProjectOpenCount(b.arg)
 
     return bCount - aCount
   })
@@ -170,7 +172,7 @@ function getRecentProjectList() {
   return projects
 }
 
-void (function main() {
+(function main() {
   const input = process.argv[2].trim().toLowerCase().replace(/\s/g, '')
 
   const query = input || ''
@@ -178,14 +180,12 @@ void (function main() {
 
   let projectList = []
 
-  if (query) {
+  if (query)
     projectList = getDirectories(dirPath, query, 2)
-  } else {
-    projectList = getRecentProjectList()
-  }
+  else projectList = getRecentProjectList()
 
   const items = []
-  projectList.forEach(project => {
+  projectList.forEach((project) => {
     items.push({
       title: project.title,
       subtitle: project.subtitle,
@@ -196,7 +196,8 @@ void (function main() {
 
   if (items.length) {
     console.log(JSON.stringify({ items }))
-  } else {
+  }
+  else {
     const item = {
       title: 'No matching project...',
       subtitle: 'Please check if your input is correct.',
