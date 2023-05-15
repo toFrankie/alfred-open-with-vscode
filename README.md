@@ -23,7 +23,7 @@ After pressing the Alfred Hotkey, enter the `open` keyword to display the folder
 ## Requirements
 
 - Requires node 10+ environment.
-- Requires zsh ([migrated to zsh](https://support.apple.com/en-ph/HT208050)).
+- Requires zsh ([migrated to zsh](https://support.apple.com/en-us/HT208050)).
 
 ## TODOs
 
