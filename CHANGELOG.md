@@ -9,3 +9,9 @@ All notable changes to this project will be documented in this file.
 > May 14, 2023
 
 Initial version.
+
+#### v0.0.2
+
+> May 16, 2023
+
+Added automatic detection of Node.js installation path.
