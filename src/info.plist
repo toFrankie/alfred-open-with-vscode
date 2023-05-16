@@ -73,7 +73,7 @@
           <key>escaping</key>
           <integer>102</integer>
           <key>keyword</key>
-          <string>open</string>
+          <string>{var:keyword}</string>
           <key>queuedelaycustom</key>
           <integer>3</integer>
           <key>queuedelayimmediatelyinitially</key>
@@ -211,7 +211,29 @@ end run</string>
       </dict>
     </dict>
     <key>userconfigurationconfig</key>
-    <array/>
+    <array>
+      <dict>
+        <key>config</key>
+        <dict>
+          <key>default</key>
+          <string>open</string>
+          <key>placeholder</key>
+          <string>open</string>
+          <key>required</key>
+          <false/>
+          <key>trim</key>
+          <true/>
+        </dict>
+        <key>description</key>
+        <string>Set your own keyword if "open" isn't the keyword for you.</string>
+        <key>label</key>
+        <string>Workflow keyword</string>
+        <key>type</key>
+        <string>textfield</string>
+        <key>variable</key>
+        <string>keyword</string>
+      </dict>
+    </array>
     <key>webaddress</key>
     <string>$webaddress</string>
     <key>version</key>

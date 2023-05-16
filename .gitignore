@@ -6,3 +6,4 @@ node_modules/
 .eslintcache
 
 alfred-open-with-vscode.alfredworkflow
+prefs.plist
