@@ -4,14 +4,20 @@ Please refer to the [homepage](https://github.com/toFrankie/alfred-open-with-vsc
 
 All notable changes to this project will be documented in this file.
 
-#### v0.0.1
+#### v0.0.3
 
-> May 14, 2023
+> May 16, 2023
 
-Initial version.
+Optimized package size.
 
 #### v0.0.2
 
 > May 16, 2023
 
 Added automatic detection of Node.js installation path.
+
+#### v0.0.1
+
+> May 14, 2023
+
+Initial version.
