@@ -1,6 +1,6 @@
 {
   "name": "alfred-open-with-vscode",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "packageManager": "pnpm@8.5.0",
   "description": "💻 An Alfred Workflow for opening folders with Visual Studio Code.",
   "author": {
@@ -14,19 +14,17 @@
   "keywords": [
     "alfred",
     "workflow",
+    "open",
     "vscode",
-    "Visual Studio Code",
-    "open"
+    "Visual Studio Code"
   ],
-  "main": "dist/bundle.js",
   "bin": {
     "alfred-open-with-vscode-import": "bin/install.sh"
   },
   "files": [
     "bin",
     "alfred-open-with-vscode.alfredworkflow",
-    "CHANGELOG.md",
-    "README.md"
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=10.0.0"

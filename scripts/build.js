@@ -10,8 +10,8 @@ const readFileAsync = promisify(fs.readFile)
 ;(async function main() {
   const zip = new AdmZip()
 
-  zip.addLocalFile('./src/icon.png')
-  zip.addLocalFile('./dist/bundle.js')
+  zip.addLocalFile(path.join(__dirname, '../src/icon.png'))
+  zip.addLocalFile(path.join(__dirname, '../dist/bundle.js'))
   zip.addFile('info.plist', await fillInfoPlist())
 
   zip.writeZip(`${pkg.name}.alfredworkflow`)
