@@ -86,7 +86,7 @@
           <string>Seaching...</string>
           <key>script</key>
           <string>source "$HOME/.zshrc"
-$(which node) ./bundle.js "$1"</string>
+$(which node) ./bundle.js "$1" "$searchDirectory"</string>
           <key>scriptargtype</key>
           <integer>1</integer>
           <key>scriptfile</key>
@@ -232,6 +232,27 @@ end run</string>
         <string>textfield</string>
         <key>variable</key>
         <string>keyword</string>
+      </dict>
+      <dict>
+        <key>config</key>
+        <dict>
+          <key>default</key>
+          <string>~</string>
+          <key>filtermode</key>
+          <integer>1</integer>
+          <key>placeholder</key>
+          <string>~</string>
+          <key>required</key>
+          <false/>
+        </dict>
+        <key>description</key>
+        <string>Specify the search scope to find the target directory quickly.</string>
+        <key>label</key>
+        <string>Search directory</string>
+        <key>type</key>
+        <string>filepicker</string>
+        <key>variable</key>
+        <string>searchDirectory</string>
       </dict>
     </array>
     <key>webaddress</key>

@@ -4,6 +4,13 @@ Please refer to the [homepage](https://github.com/toFrankie/alfred-open-with-vsc
 
 All notable changes to this project will be documented in this file.
 
+#### v0.0.4
+
+> May 17, 2023
+
+- Supported custom workflow keyword.
+- Supported specifying search directory.
+
 #### v0.0.3
 
 > May 16, 2023

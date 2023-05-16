@@ -10,23 +10,26 @@ function getDirectories(rootDir, dirName, depth = -1) {
 
   const dirs = fs.readdirSync(rootDir)
   for (const dir of dirs) {
-    const filePath = path.join(rootDir, dir)
-    const stat = fs.statSync(filePath)
+    try {
+      const filePath = path.join(rootDir, dir)
+      const stat = fs.statSync(filePath)
 
-    if (stat.isDirectory()) {
-      if (dir.toLowerCase().includes(dirName.toLowerCase())) {
-        result.push({
-          title: dir,
-          subtitle: filePath,
-          arg: filePath,
-          icon: {
-            path: './icon.png',
-          },
-        })
+      if (stat.isDirectory()) {
+        if (dir.toLowerCase().includes(dirName.toLowerCase())) {
+          result.push({
+            title: dir,
+            subtitle: filePath,
+            arg: filePath,
+            icon: {
+              path: './icon.png',
+            },
+          })
+        }
+
+        result.push(...getDirectories(filePath, dirName, depth - 1))
       }
-
-      result.push(...getDirectories(filePath, dirName, depth - 1))
     }
+    catch (e) {}
   }
 
   return result
@@ -84,14 +87,13 @@ function getRecentProjects() {
 
 (function main() {
   const input = process.argv[2].trim().toLowerCase().replace(/\s/g, '')
-
   const query = input || ''
-  const dirPath = '/Users/frankie/Web' // Replace with your project directory.
+  const searchDir = process.argv[3].trim()
 
   let projectList = []
 
-  if (query)
-    projectList = getDirectories(dirPath, query, 2)
+  if (input)
+    projectList = getDirectories(searchDir, query, 3)
   else projectList = getRecentProjects()
 
   const items = []

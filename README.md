@@ -27,5 +27,5 @@ After pressing the Alfred Hotkey, enter the `open` keyword to display the folder
 
 ## TODOs
 
-- Support custom keywords.
-- Sort by open frequency.
+- [x] Support custom workflow keywords.
+- [ ] Sort by open frequency.
