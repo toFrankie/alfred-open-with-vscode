@@ -9,6 +9,7 @@ function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
   if (depth === 0)
     return result
 
+  const homeDir = os.homedir()
   const dirs = fs.readdirSync(rootDir)
   for (const dir of dirs) {
     try {
@@ -23,7 +24,7 @@ function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
         if (dir.toLowerCase().includes(dirName.toLowerCase())) {
           result.push({
             title: dir,
-            subtitle: filePath,
+            subtitle: filePath.replace(homeDir, '~'),
             arg: filePath,
             icon: {
               path: './icon.png',
