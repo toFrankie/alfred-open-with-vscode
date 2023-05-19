@@ -2,12 +2,11 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
-function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
+function getDirectories({rootDir, ignoreDirName, dirName, depth = 3}) {
   const result = []
-  const ignoreDirs = ignoreDirNames.split(',').map(name => name.trim())
+  const ignoreDirs = ignoreDirName.split(',').map(name => name.trim())
 
-  if (depth === 0)
-    return result
+  if (depth === 0) return result
 
   const homeDir = os.homedir()
   const dirs = fs.readdirSync(rootDir)
@@ -18,8 +17,7 @@ function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
 
       if (stat.isDirectory()) {
         const filename = path.basename(filePath)
-        if (ignoreDirs.includes(filename))
-          continue
+        if (ignoreDirs.includes(filename)) continue
 
         if (dir.toLowerCase().includes(dirName.toLowerCase())) {
           result.push({
@@ -32,10 +30,9 @@ function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
           })
         }
 
-        result.push(...getDirectories(filePath, ignoreDirNames, dirName, depth - 1))
+        result.push(...getDirectories({rootDir: filePath, ignoreDirName, dirName}))
       }
-    }
-    catch (e) {}
+    } catch (e) {}
   }
 
   return result
@@ -44,7 +41,7 @@ function getDirectories(rootDir, ignoreDirNames, dirName, depth = -1) {
 function getRecentProjects() {
   const workspaceStoragePath = path.join(
     os.homedir(),
-    'Library/Application Support/Code/User/workspaceStorage',
+    'Library/Application Support/Code/User/workspaceStorage'
   )
   const yearAgo = Date.now() - 365 * 24 * 60 * 60 * 1000
 
@@ -55,11 +52,10 @@ function getRecentProjects() {
       path: path.join(workspaceStoragePath, name),
       stat: fs.statSync(path.join(workspaceStoragePath, name)),
     }))
-    .map((dir) => {
+    .map(dir => {
       const workspaceJsonPath = path.join(dir.path, 'workspace.json')
 
-      if (!fs.existsSync(workspaceJsonPath))
-        return false
+      if (!fs.existsSync(workspaceJsonPath)) return false
 
       const workspaceJson = fs.readFileSync(workspaceJsonPath, 'utf8')
       const workspaceObj = JSON.parse(workspaceJson)
@@ -67,11 +63,9 @@ function getRecentProjects() {
       const folderPath = decodeURIComponent(folderUrl.slice(7)) // "file:///Users/frankie/web/demo"
 
       try {
-        if (fs.statSync(folderPath).isDirectory())
-          return { ...dir, targetPath: folderPath }
+        if (fs.statSync(folderPath).isDirectory()) return {...dir, targetPath: folderPath}
         return false
-      }
-      catch {
+      } catch {
         return false
       }
     })
@@ -81,30 +75,32 @@ function getRecentProjects() {
     .slice(0, 10)
 
   // Convert to alfred items
-  return dirs.map((projectPath) => {
+  return dirs.map(projectPath => {
     return {
       title: path.basename(projectPath),
       subtitle: projectPath,
       arg: projectPath,
-      icon: { path: './icon.png' },
+      icon: {path: './icon.png'},
     }
   })
 }
 
-(function main() {
+;(function main() {
   const input = process.argv[2].trim().toLowerCase().replace(/\s/g, '')
   const query = input || ''
   const searchDir = process.argv[3].trim()
-  const ignoreDirNames = process.argv[4].trim() || ''
+  const ignoreDirName = process.argv[4].trim() || ''
 
   let projectList = []
 
-  if (input)
-    projectList = getDirectories(searchDir, ignoreDirNames, query, 3)
-  else projectList = getRecentProjects()
+  if (input) {
+    projectList = getDirectories({rootDir: searchDir, ignoreDirName, dirName: query})
+  } else {
+    projectList = getRecentProjects()
+  }
 
   const items = []
-  projectList.forEach((project) => {
+  projectList.forEach(project => {
     items.push({
       title: project.title,
       subtitle: project.subtitle,
@@ -114,14 +110,13 @@ function getRecentProjects() {
   })
 
   if (items.length) {
-    console.log(JSON.stringify({ items }))
-  }
-  else {
+    console.log(JSON.stringify({items}))
+  } else {
     const item = {
       title: 'No matching project...',
       subtitle: 'Please check if your input is correct.',
       arg: ' ',
     }
-    console.log(JSON.stringify({ items: [item] }))
+    console.log(JSON.stringify({items: [item]}))
   }
 })()

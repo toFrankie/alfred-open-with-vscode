@@ -1,8 +1,10 @@
 const path = require('node:path')
 const fs = require('node:fs')
-const { promisify } = require('node:util')
+const {promisify} = require('node:util')
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const AdmZip = require('adm-zip')
+
 const pkg = require('../package.json')
 
 const readFileAsync = promisify(fs.readFile)
@@ -31,6 +33,5 @@ async function fillInfoPlist() {
     .replace('$webaddress', pkg.homepage)
     .replace('$readme', changelog)
 
-  // eslint-disable-next-line n/prefer-global/buffer
   return Buffer.from(replacedPlist)
 }

@@ -1,4 +1,4 @@
-const { defineConfig } = require('rollup')
+const {defineConfig} = require('rollup')
 const resolve = require('@rollup/plugin-node-resolve')
 const babel = require('@rollup/plugin-babel')
 
@@ -15,7 +15,7 @@ module.exports = defineConfig({
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'bundled',
-      presets: [['@babel/preset-env', { targets: { node: '10' } }]],
+      presets: [['@babel/preset-env', {targets: {node: '10'}}]],
     }),
   ],
 })
