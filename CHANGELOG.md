@@ -4,6 +4,12 @@ Please refer to the [homepage](https://github.com/toFrankie/alfred-open-with-vsc
 
 All notable changes to this project will be documented in this file.
 
+#### v0.0.5
+
+> May 19, 2023
+
+- Support ignoring specific directories.
+
 #### v0.0.4
 
 > May 17, 2023
