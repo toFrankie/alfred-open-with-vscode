@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
-function getDirectories({rootDir, ignoreDirName, dirName, depth = 3}) {
+function getDirectories({rootDir, ignoreDirName, dirName, depth}) {
   const result = []
   const ignoreDirs = ignoreDirName.split(',').map(name => name.trim())
 
@@ -30,7 +30,9 @@ function getDirectories({rootDir, ignoreDirName, dirName, depth = 3}) {
           })
         }
 
-        result.push(...getDirectories({rootDir: filePath, ignoreDirName, dirName}))
+        result.push(
+          ...getDirectories({rootDir: filePath, ignoreDirName, dirName, depth: depth - 1})
+        )
       }
     } catch (e) {}
   }
@@ -89,12 +91,18 @@ function getRecentProjects() {
   const input = process.argv[2].trim().toLowerCase().replace(/\s/g, '')
   const query = input || ''
   const searchDir = process.argv[3].trim()
-  const ignoreDirName = process.argv[4].trim() || ''
+  const searchDepth = process.argv[4].trim() || 3
+  const ignoreDirName = process.argv[5].trim() || ''
 
   let projectList = []
 
   if (input) {
-    projectList = getDirectories({rootDir: searchDir, ignoreDirName, dirName: query})
+    projectList = getDirectories({
+      rootDir: searchDir,
+      ignoreDirName,
+      dirName: query,
+      depth: searchDepth,
+    })
   } else {
     projectList = getRecentProjects()
   }

@@ -86,7 +86,7 @@
           <string>Seaching...</string>
           <key>script</key>
           <string>source "$HOME/.zshrc"
-$(which node) ./bundle.js "$1" "$searchDirectory" "$ignoreDirectories"</string>
+$(which node) ./bundle.js "$1" "$searchDirectory" "$searchDepth" "$ignoreDirectories"</string>
           <key>scriptargtype</key>
           <integer>1</integer>
           <key>scriptfile</key>
@@ -253,6 +253,27 @@ end run</string>
         <string>filepicker</string>
         <key>variable</key>
         <string>searchDirectory</string>
+      </dict>
+      <dict>
+        <key>config</key>
+        <dict>
+          <key>default</key>
+          <string>3</string>
+          <key>placeholder</key>
+          <string>3</string>
+          <key>required</key>
+          <false/>
+          <key>trim</key>
+          <true/>
+        </dict>
+        <key>description</key>
+        <string>Specify the depth of the search directory.</string>
+        <key>label</key>
+        <string>Search depth</string>
+        <key>type</key>
+        <string>textfield</string>
+        <key>variable</key>
+        <string>searchDepth</string>
       </dict>
       <dict>
         <key>config</key>
