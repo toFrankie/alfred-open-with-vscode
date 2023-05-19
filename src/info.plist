@@ -86,7 +86,7 @@
           <string>Seaching...</string>
           <key>script</key>
           <string>source "$HOME/.zshrc"
-$(which node) ./bundle.js "$1" "$searchDirectory"</string>
+$(which node) ./bundle.js "$1" "$searchDirectory" "$ignoreDirectories"</string>
           <key>scriptargtype</key>
           <integer>1</integer>
           <key>scriptfile</key>
@@ -253,6 +253,27 @@ end run</string>
         <string>filepicker</string>
         <key>variable</key>
         <string>searchDirectory</string>
+      </dict>
+      <dict>
+        <key>config</key>
+        <dict>
+          <key>default</key>
+          <string></string>
+          <key>placeholder</key>
+          <string>like "node_modules,bower_components" etc.</string>
+          <key>required</key>
+          <false/>
+          <key>trim</key>
+          <true/>
+        </dict>
+        <key>description</key>
+        <string>Support ignoring specific directories, like "node_modules". Use commas (,) to separate multiple directories.</string>
+        <key>label</key>
+        <string>Ignore Directories</string>
+        <key>type</key>
+        <string>textfield</string>
+        <key>variable</key>
+        <string>ignoreDirectories</string>
       </dict>
     </array>
     <key>webaddress</key>
