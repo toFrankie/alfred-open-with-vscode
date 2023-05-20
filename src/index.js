@@ -93,6 +93,7 @@ function getRecentProjects() {
   const ignoreDirName = process.argv[5].trim() || ''
 
   let projectList = []
+  let notMatches = false
 
   if (input) {
     projectList = getDirectories({
@@ -101,8 +102,20 @@ function getRecentProjects() {
       dirName: query,
       depth: searchDepth,
     })
-  } else {
+    if (!projectList.length) notMatches = true
+  }
+
+  if (!input || notMatches) {
     projectList = getRecentProjects()
+
+    if (notMatches) {
+      projectList.unshift({
+        title: 'Sorry, no such directory',
+        subtitle: 'Here are your recently folders opened with Visual Studio Code. 👇',
+        arg: '',
+        icon: {path: './404.png'},
+      })
+    }
   }
 
   const items = []
@@ -114,16 +127,5 @@ function getRecentProjects() {
       icon: project.icon,
     })
   })
-
-  if (items.length) {
-    console.log(JSON.stringify({items}))
-  } else {
-    const item = {
-      title: 'Sorry, no such directory',
-      subtitle: '',
-      arg: '',
-      icon: {path: './404.png'},
-    }
-    console.log(JSON.stringify({items: [item]}))
-  }
+  console.log(JSON.stringify({items}))
 })()
