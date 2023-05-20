@@ -4,23 +4,23 @@ import path from 'node:path'
 
 export const HOME_DIR = os.homedir()
 
-export function searchDirectories({rootDir, ignoreDirName, dirName, depth}) {
+export function searchDirectories({searchDir, searchDepth, ignoreDir, query}) {
   const result = []
-  const ignoreDirs = ignoreDirName.split(',').map(name => name.trim())
+  const ignoreDirs = ignoreDir.split(',').map(name => name.trim())
 
-  if (depth === 0) return result
+  if (searchDepth === 0) return result
 
-  const dirs = fs.readdirSync(rootDir)
+  const dirs = fs.readdirSync(searchDir)
   for (const dir of dirs) {
     try {
-      const filePath = path.join(rootDir, dir)
+      const filePath = path.join(searchDir, dir)
       const stat = fs.statSync(filePath)
 
       if (stat.isDirectory()) {
         const filename = path.basename(filePath)
         if (ignoreDirs.includes(filename)) continue
 
-        if (dir.toLowerCase().includes(dirName.toLowerCase())) {
+        if (dir.toLowerCase().includes(query.toLowerCase())) {
           result.push({
             title: dir,
             subtitle: filePath.replace(HOME_DIR, '~'),
@@ -30,13 +30,16 @@ export function searchDirectories({rootDir, ignoreDirName, dirName, depth}) {
         }
 
         result.push(
-          ...searchDirectories({rootDir: filePath, ignoreDirName, dirName, depth: depth - 1})
+          ...searchDirectories({
+            searchDir: filePath,
+            searchDepth: searchDepth - 1,
+            ignoreDir,
+            query,
+          })
         )
       }
     } catch (e) {}
   }
-
-  result.length = 1
 
   return result
 }

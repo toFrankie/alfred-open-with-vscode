@@ -3,7 +3,7 @@ import {searchDirectories, getRecentDirectories, HOME_DIR} from './utils/file'
 main()
 
 function main() {
-  let [_exec, _script, query = '', searchDir = HOME_DIR, searchDepth = 3, ignoreDirName = ''] =
+  let [_exec, _script, query = '', searchDir = HOME_DIR, searchDepth = 3, ignoreDir = ''] =
     process.argv.map(arg => arg.trim())
 
   query = query.toLowerCase().replace(/\s/g, '')
@@ -13,10 +13,10 @@ function main() {
 
   if (query) {
     projectList = searchDirectories({
-      rootDir: searchDir,
-      ignoreDirName,
-      dirName: query,
-      depth: searchDepth,
+      searchDir,
+      searchDepth,
+      ignoreDir,
+      query,
     }).filter(Boolean)
 
     if (!projectList.length) notMatches = true
