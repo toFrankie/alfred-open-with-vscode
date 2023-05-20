@@ -4,6 +4,12 @@ Please refer to the [homepage](https://github.com/toFrankie/alfred-open-with-vsc
 
 All notable changes to this project will be documented in this file.
 
+#### v0.0.7
+
+> May 20, 2023
+
+- Optimized the display of search results.
+
 #### v0.0.6
 
 > May 20, 2023
