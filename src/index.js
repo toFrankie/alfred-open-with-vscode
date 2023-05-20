@@ -24,9 +24,7 @@ function getDirectories({rootDir, ignoreDirName, dirName, depth}) {
             title: dir,
             subtitle: filePath.replace(homeDir, '~'),
             arg: filePath,
-            icon: {
-              path: './icon.png',
-            },
+            icon: {path: './icon.png'},
           })
         }
 
@@ -121,9 +119,10 @@ function getRecentProjects() {
     console.log(JSON.stringify({items}))
   } else {
     const item = {
-      title: 'No matching project...',
-      subtitle: 'Please check if your input is correct.',
-      arg: ' ',
+      title: 'Sorry, no such directory',
+      subtitle: '',
+      arg: '',
+      icon: {path: './404.png'},
     }
     console.log(JSON.stringify({items: [item]}))
   }

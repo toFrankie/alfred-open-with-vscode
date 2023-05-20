@@ -126,9 +126,9 @@ $(which node) ./bundle.js "$1" "$searchDirectory" "$searchDepth" "$ignoreDirecto
               <key>matchcasesensitive</key>
               <false/>
               <key>matchmode</key>
-              <integer>0</integer>
+              <integer>4</integer>
               <key>matchstring</key>
-              <string></string>
+              <string>^\s*$</string>
               <key>outputlabel</key>
               <string>hide</string>
               <key>uid</key>
