@@ -1,48 +1,70 @@
-import {searchDirectories, getRecentDirectories, HOME_DIR} from './utils/file'
+import path from 'node:path'
+import os from 'node:os'
+
+import {
+  getAllDirectory,
+  getTargetDirectories,
+  getRecentDirectories,
+  getStorageDirectories,
+  updateStorageDirectories,
+} from './utils/file'
+
+const HOME_DIR = os.homedir()
 
 main()
 
 function main() {
-  let [_exec, _script, query = '', searchDir = HOME_DIR, searchDepth = 3, ignoreDir = ''] =
+  let [_exec, _script, query = '', searchPath = HOME_DIR, searchDepth = 3, ignoreDir = ''] =
     process.argv.map(arg => arg.trim())
 
   query = query.toLowerCase().replace(/\s/g, '')
 
-  let projectList = []
-  let notMatches = false
+  let allDir = []
+  let targetDirs = []
+  let storageDirs = []
+  let notMatched = false
+  let shouldUpdateStorage = false
+  const storageKey = `${searchPath} | ${searchDepth}`
 
   if (query) {
-    projectList = searchDirectories({
-      searchDir,
-      searchDepth,
-      ignoreDir,
-      query,
-    }).filter(Boolean)
+    storageDirs = getStorageDirectories({storageKey, ignoreDir})
 
-    if (!projectList.length) notMatches = true
-  }
+    if (storageDirs.length) {
+      targetDirs = storageDirs
+    } else {
+      allDir = getAllDirectory({searchPath, searchDepth, ignoreDir})
+      targetDirs = getTargetDirectories({allDir, query})
 
-  if (!query || notMatches) {
-    projectList = getRecentDirectories().filter(Boolean)
+      if (!targetDirs.length) notMatched = true
 
-    if (notMatches) {
-      projectList.unshift({
-        title: 'Sorry, no matching results.',
-        subtitle: 'Here are your recently folders opened with Visual Studio Code. 👇',
-        arg: '',
-        icon: {path: './404.png'},
-      })
+      shouldUpdateStorage = true
     }
   }
 
-  const items = []
-  projectList.forEach(project => {
-    items.push({
-      title: project.title,
-      subtitle: project.subtitle,
-      arg: project.arg,
-      icon: project.icon,
-    })
+  if (!query || notMatched) targetDirs = getRecentDirectories()
+
+  const alfredItems = targetDirs.filter(Boolean).map(filePath => {
+    const basename = path.basename(filePath)
+    return {
+      title: basename,
+      subtitle: filePath.replace(HOME_DIR, '~'),
+      arg: filePath,
+      icon: {path: './icon.png'},
+    }
   })
-  console.log(JSON.stringify({items}))
+
+  if (notMatched) {
+    alfredItems.unshift({
+      title: 'Sorry, no matching results.',
+      subtitle: 'Here are your recently folders opened with Visual Studio Code. 👇',
+      arg: '',
+      icon: {path: './404.png'},
+    })
+  }
+
+  console.log(JSON.stringify({items: alfredItems}))
+
+  if (shouldUpdateStorage) {
+    updateStorageDirectories({storageKey, ignoreDir, dirs: allDir})
+  }
 }

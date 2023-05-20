@@ -86,7 +86,7 @@
           <string>Seaching...</string>
           <key>script</key>
           <string>source "$HOME/.zshrc"
-$(which node) ./bundle.js "$1" "$searchDir" "$searchDepth" "$ignoreDir"</string>
+$(which node) ./bundle.js "$1" "$searchPath" "$searchDepth" "$ignoreDir"</string>
           <key>scriptargtype</key>
           <integer>1</integer>
           <key>scriptfile</key>
@@ -246,13 +246,13 @@ end run</string>
           <false/>
         </dict>
         <key>description</key>
-        <string>Specify the search scope to find the target directory quickly.</string>
+        <string>Set the search scope to find the target directory quickly.</string>
         <key>label</key>
-        <string>Search directory</string>
+        <string>Search path</string>
         <key>type</key>
         <string>filepicker</string>
         <key>variable</key>
-        <string>searchDir</string>
+        <string>searchPath</string>
       </dict>
       <dict>
         <key>config</key>
@@ -267,7 +267,7 @@ end run</string>
           <true/>
         </dict>
         <key>description</key>
-        <string>Specify the depth of the search directory.</string>
+        <string>Set the depth of the search path.</string>
         <key>label</key>
         <string>Search depth</string>
         <key>type</key>
@@ -279,16 +279,16 @@ end run</string>
         <key>config</key>
         <dict>
           <key>default</key>
-          <string>node_modules,bower_components</string>
+          <string>node_modules,bower_components,dist</string>
           <key>placeholder</key>
-          <string>node_modules,bower_components</string>
+          <string>node_modules,bower_components,dist</string>
           <key>required</key>
           <false/>
           <key>trim</key>
           <true/>
         </dict>
         <key>description</key>
-        <string>Support ignoring specific directories, like "node_modules". Use commas (,) to separate multiple directories.</string>
+        <string>Set ignored directory. By default, hidden files like ".git" and ".vscode" are excluded. Use commas (,) to separate multiple directories. </string>
         <key>label</key>
         <string>Ignore directory</string>
         <key>type</key>

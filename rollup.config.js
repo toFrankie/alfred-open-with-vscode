@@ -1,5 +1,6 @@
 const {defineConfig} = require('rollup')
 const resolve = require('@rollup/plugin-node-resolve')
+const json = require('@rollup/plugin-json')
 const babel = require('@rollup/plugin-babel')
 
 module.exports = defineConfig({
@@ -11,6 +12,7 @@ module.exports = defineConfig({
     sourcemap: false,
   },
   plugins: [
+    json(),
     resolve(),
     babel({
       exclude: 'node_modules/**',

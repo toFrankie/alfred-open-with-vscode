@@ -19,6 +19,9 @@ devDependencies:
   '@rollup/plugin-babel':
     specifier: ^6.0.3
     version: 6.0.3(@babel/core@7.21.8)(rollup@3.21.7)
+  '@rollup/plugin-json':
+    specifier: ^6.0.0
+    version: 6.0.0(rollup@3.21.7)
   '@rollup/plugin-node-resolve':
     specifier: ^15.0.2
     version: 15.0.2(rollup@3.21.7)
@@ -1388,6 +1391,19 @@ packages:
     dependencies:
       '@babel/core': 7.21.8
       '@babel/helper-module-imports': 7.21.4
+      '@rollup/pluginutils': 5.0.2(rollup@3.21.7)
+      rollup: 3.21.7
+    dev: true
+
+  /@rollup/plugin-json@6.0.0(rollup@3.21.7):
+    resolution: {integrity: sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.21.7)
       rollup: 3.21.7
     dev: true

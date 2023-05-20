@@ -47,6 +47,7 @@
     "@ifanrx/eslint-config-standard": "^1.0.0",
     "@ifanrx/prettier-config-standard": "^1.0.0",
     "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "adm-zip": "^0.5.10",
     "eslint": "^8.40.0",
