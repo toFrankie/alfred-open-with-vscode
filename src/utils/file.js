@@ -69,6 +69,7 @@ export function getRecentDirectories() {
       const workspaceJson = fs.readFileSync(workspaceJsonPath, 'utf8')
       const workspaceObj = JSON.parse(workspaceJson)
       const folderUrl = workspaceObj.folder
+      if (!folderUrl) return false
       const folderPath = decodeURIComponent(folderUrl.slice(7)) // "file:///Users/frankie/web/demo"
 
       try {
