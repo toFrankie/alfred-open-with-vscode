@@ -4,6 +4,12 @@ Please refer to the [homepage](https://github.com/toFrankie/alfred-open-with-vsc
 
 All notable changes to this project will be documented in this file.
 
+#### v0.0.9
+
+> May 02, 2024
+
+- Fixed path parsing exception issue.
+
 #### v0.0.8
 
 > May 21, 2023
